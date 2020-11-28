@@ -1,0 +1,20 @@
+.forecast {
+    position: absolute;
+    left: 0;
+    bottom: 30px;
+    width: 100%;
+    display: flex;
+    padding: 0 20px;
+    justify-content: space-between;
+}
+
+.day {
+    flex-basis: calc(100%/7);
+    margin: 0 10px;
+    border-radius: 10px;
+    background-color: rgba(200, 200, 200, 0.1);
+}
+
+.day h4 {
+    text-transform: capitalize;
+}
