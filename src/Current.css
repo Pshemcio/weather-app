@@ -1,5 +1,12 @@
-.current-forecast {
+.current-forecast,
+.city,
+.current-temp,
+.current-others {
     display: flex;
+
+}
+
+.current-forecast {
     flex-wrap: wrap;
     justify-content: flex-start;
 }
@@ -13,7 +20,6 @@
 
 .city {
     flex-basis: 100%;
-    display: flex;
     flex-flow: column;
     align-items: flex-start;
     padding-left: 30px;
@@ -34,7 +40,6 @@
 }
 
 .current-temp {
-    display: flex;
     justify-content: center;
     align-items: center;
 }
@@ -57,7 +62,6 @@
 }
 
 .current-others {
-    display: flex;
     flex-wrap: wrap;
     background-color: rgba(0, 0, 0, 0.2);
     border-radius: 10px;

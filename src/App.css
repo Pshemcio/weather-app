@@ -1,13 +1,13 @@
 * {
   color: white;
   box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .App {
   position: relative;
   z-index: 1;
   text-align: center;
-  /* background-image: url(./img/main-bg.png); */
   background: linear-gradient(rgba(0, 0, 0, 0.15) 40%, rgba(0, 0, 0, 1)), url(./img/main-bg.png);
   background-size: cover;
   min-height: 100vh;

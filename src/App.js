@@ -78,32 +78,65 @@ function App() {
   const submitCity = e => {
     e.preventDefault();
 
-    Axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=de310e87d3a7bcda1c723953103565a6&units=metric&lang=pl`)
-      .then(function (response) {
-        // handle success
+    const getCurrentData = () => {
+      Axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=de310e87d3a7bcda1c723953103565a6&units=metric&lang=pl`)
+        .then(function (response) {
+          // handle success
 
-        document.querySelectorAll('.hide').forEach((section) => {
-          section.style.opacity = '0';
+          document.querySelectorAll('.hide').forEach((section) => {
+            section.style.opacity = '0';
+          })
+
+          setTimeout(() => {
+            setData(response);
+          }, 400);
+          document.querySelector('.error-msg').textContent = '';
+          document.querySelector('.input-wrap input').value = '';
+          setCity('');
+
         })
+        .catch(function (error) {
+          // handle error
+          if (document.querySelector('input').value === '') {
+            document.querySelector('.error-msg').textContent = 'Musisz coś wpisać!'
+            return
+          } else {
+            document.querySelector('.error-msg').textContent = 'Wpisz poprawną nazwę miasta!'
+            console.log(error);
+          };
+        });
+    };
 
-        setTimeout(() => {
-          setData(response);
-        }, 400);
-        document.querySelector('.error-msg').textContent = '';
-        document.querySelector('.input-wrap input').value = '';
-        setCity('');
+    // const getForecastData = () => {
+    //   Axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=de310e87d3a7bcda1c723953103565a6&units=metric&lang=pl`)
+    //     .then(function (response) {
+    //       // handle success
 
-      })
-      .catch(function (error) {
-        // handle error
-        if (document.querySelector('input').value === '') {
-          document.querySelector('.error-msg').textContent = 'Musisz coś wpisać!'
-          return
-        } else {
-          document.querySelector('.error-msg').textContent = 'Wpisz poprawną nazwę miasta!'
-          console.log(error);
-        };
-      });
+    //       document.querySelectorAll('.hide').forEach((section) => {
+    //         section.style.opacity = '0';
+    //       })
+
+    //       setTimeout(() => {
+    //         setData(response);
+    //       }, 400);
+    //       document.querySelector('.error-msg').textContent = '';
+    //       document.querySelector('.input-wrap input').value = '';
+    //       setCity('');
+
+    //     })
+    //     .catch(function (error) {
+    //       // handle error
+    //       if (document.querySelector('input').value === '') {
+    //         document.querySelector('.error-msg').textContent = 'Musisz coś wpisać!'
+    //         return
+    //       } else {
+    //         document.querySelector('.error-msg').textContent = 'Wpisz poprawną nazwę miasta!'
+    //         console.log(error);
+    //       };
+    //     });
+    // }
+
+    getCurrentData();
   };
 
   useEffect(() => {
@@ -133,7 +166,7 @@ function App() {
       </header>
       <Input cityName={getCity} checkForm={submitCity} />
       <Current currentData={data} />
-      <Forecast />
+      <Forecast forecastData={data} />
     </div>
   );
 }
