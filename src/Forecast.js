@@ -5,7 +5,7 @@ import Day from './Day'
 
 const Forecast = () => {
     return (
-        <section className="forecast">
+        <section className="forecast hide">
             <Day day='poniedziałek' />
             <Day day='wtorek' />
             <Day day='środa' />

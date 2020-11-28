@@ -2,25 +2,36 @@ import React from 'react';
 import './Current.css'
 
 function Current(props) {
+    const data = props.currentData.data;
+    const description = data.weather[0].description
+    const city = data.name;
+    const temp = data.main.temp.toFixed();
+    const humidity = data.main.humidity;
+    const pressure = data.main.pressure;
+    const feelsLike = data.main.feels_like.toFixed();
+    const wind = (data.wind.speed * 3.6).toFixed(1);
+    const sunrise = data.sys.sunrise;
+    const sunset = data.sys.sunset;
+    const icon = data.weather[0].icon;
+    const iconUrl = 'http://openweathermap.org/img/wn/' + icon + '@2x.png';
+
+    function format_time(daytime) {
+        const time = new Date((daytime * 1000) - (new Date().getTimezoneOffset() * 60000)).toISOString().replace(/T/, ' ').replace(/\..+/, '').slice(11, -3);
+
+        return time;
+    };
 
     const date = () => {
-        console.log(props.currentDate)
-        const a = new Date(props.currentDate * 1000);
-        console.log(a)
+        const a = new Date((data.dt * 1000) - (new Date().getTimezoneOffset() * 60000));
 
-        const days = ['Poniedziałek', 'Wtorek', 'Środa', 'Czwartek', 'Piątek', 'Sobota', 'Niedziela']
+
+        const days = ['Niedziela', 'Poniedziałek', 'Wtorek', 'Środa', 'Czwartek', 'Piątek', 'Sobota']
 
         const months = ['Stycznia', 'Lutego', 'Marca', 'Kwietnia', 'Maja', 'Czerwca', 'Lipca', 'Sierpnia', 'Września', 'Października', 'Listopada', 'Grudnia'];
 
         const day = days[a.getDay()];
         const month = months[a.getMonth()];
-
-        console.log(day)
-        console.log(a.getDate())
-        console.log(month)
         const time = `${day} ${a.getDate()} ${month}`;
-        console.log(time)
-
         return time;
     };
 
@@ -28,51 +39,50 @@ function Current(props) {
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
 
-    const desc = capitalizeFirstLetter(props.currentDesc);
+    const desc = capitalizeFirstLetter(description);
 
     return (
-        <section className="current-forecast">
+        <section className="current-forecast hide">
             <div className="city">
-                <h2>{props.currentCity}</h2>
+                <h2>{city}</h2>
                 <p>{date()}</p>
             </div>
             <div className="current-temp">
                 <div className="icon">
-                    <img src="https://picsum.photos/110" alt="lorem"></img>
+                    <img src={iconUrl} alt="lorem"></img>
                 </div>
                 <div className="info">
-                    <h2>{props.currentTemp}</h2>
+                    <h2>{temp}°C</h2>
                     <p>{desc}</p>
                 </div>
             </div>
             <div className="current-others">
                 <div className="rain">
-                    <h3>60%</h3>
+                    <h3>{feelsLike}°C</h3>
                     <p>Odczuwalna temperatura</p>
                 </div>
                 <div className="wind">
-                    <h3>10km/h</h3>
+                    <h3>{wind}km/h</h3>
                     <p>Prędkość wiatru</p>
                 </div>
                 <div className="sunrise">
-                    <h3>06:00</h3>
+                    <h3>{format_time(sunrise)}</h3>
                     <p>Wschód</p>
                 </div>
                 <div className="pressure">
-                    <h3>992hPa</h3>
+                    <h3>{pressure}hPa</h3>
                     <p>Ciśnienie</p>
                 </div>
                 <div className="humidity">
-                    <h3>20%</h3>
+                    <h3>{humidity}%</h3>
                     <p>Wilgotność</p>
                 </div>
                 <div className="sunset">
-                    <h3>06:00</h3>
+                    <h3>{format_time(sunset)}</h3>
                     <p>Zachód</p>
                 </div>
             </div>
         </section>
     );
 }
-
 export default Current;

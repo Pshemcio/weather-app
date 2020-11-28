@@ -97,6 +97,8 @@ current-others
     font-weight: 300;
 }
 
-img {
-    border-radius: 50%;
+section img {
+    transform: translateY(-10px);
+    width: 130px;
+    height: 130px;
 }

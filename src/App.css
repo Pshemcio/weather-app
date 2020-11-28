@@ -39,6 +39,11 @@ h1 {
   font-size: 1.6rem;
 }
 
+.hide {
+  opacity: 0;
+  transition: opacity .4s;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

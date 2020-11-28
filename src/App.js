@@ -40,31 +40,29 @@ function App() {
   //     console.log(error);
   //   });
 
-  // data
-
   const entryData = {
     data: {
       main: {
-        humidity: 100,
-        pressure: 1023,
-        temp: 20,
-        feels_like: 10
+        humidity: 0,
+        pressure: 0,
+        temp: 0,
+        feels_like: 0
       },
-      name: 'Kraków',
-      dt: 1560350645,
+      name: '',
+      dt: 0,
       sys: {
-        sunrise: 1606543880,
-        sunset: 1606574678
+        sunrise: 0,
+        sunset: 0
       },
       weather: [
         {
-          description: 'clear sky',
+          description: '',
           // main: 'Clear',
-          icon: '01d'
+          icon: '10n'
         }
       ],
       wind: {
-        speed: 1.5
+        speed: 0
       }
     }
   };
@@ -83,7 +81,14 @@ function App() {
     Axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=de310e87d3a7bcda1c723953103565a6&units=metric&lang=pl`)
       .then(function (response) {
         // handle success
-        setData(response);
+
+        document.querySelectorAll('.hide').forEach((section) => {
+          section.style.opacity = '0';
+        })
+
+        setTimeout(() => {
+          setData(response);
+        }, 400);
         document.querySelector('.error-msg').textContent = '';
         document.querySelector('.input-wrap input').value = '';
 
@@ -94,43 +99,26 @@ function App() {
         document.querySelector('.error-msg').textContent = 'Wpisz poprawną nazwę miasta!'
         console.log(error);
       });
-  }
+  };
 
   useEffect(() => {
-    if (data === undefined) {
-      return
-    }
 
-    console.log(data)
-    // console.log(data.data.name);
-    // console.log(myData.weather[0].main)
-    // console.log(myData.weather[0].description)
+    const test = () => {
 
-  }, [data])
+      if (data.data.name !== '') {
+        const sectionsToHide = document.querySelectorAll('.hide');
 
-  // const entryData = {
-  //   data: {
-  //     main: {
-  //       humidity: 100,
-  //       pressure: 1023,
-  //       feels_like: 10
-  //     },
-  //     dt: 1560350645,
-  //     sys: {
-  //       sunrise: 1606543880,
-  //       sunset: 1606574678
-  //     },
-  //     weather: [
-  //       {
-  //         // main: 'Clear',
-  //         icon: '01d'
-  //       }
-  //     ],
-  //     wind: {
-  //       speed: 1.5
-  //     }
-  //   }
-  // };
+        setTimeout(() => {
+          sectionsToHide.forEach((section) => {
+            section.style.opacity = '1';
+          })
+        }, 300);
+      };
+    };
+
+    test();
+
+  }, [data]);
 
   return (
     <div className="App">
@@ -139,7 +127,7 @@ function App() {
         <img src={logo} className="App-logo" alt="logo" />
       </header>
       <Input cityName={getCity} checkForm={submitCity} />
-      <Current currentCity={data.data.name} currentTemp={data.data.main.temp} currentDesc={data.data.weather[0].description} currentDate={data.data.dt} />
+      <Current currentData={data} />
       <Forecast />
     </div>
   );
