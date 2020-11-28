@@ -91,13 +91,18 @@ function App() {
         }, 400);
         document.querySelector('.error-msg').textContent = '';
         document.querySelector('.input-wrap input').value = '';
+        setCity('');
 
       })
       .catch(function (error) {
         // handle error
-
-        document.querySelector('.error-msg').textContent = 'Wpisz poprawną nazwę miasta!'
-        console.log(error);
+        if (document.querySelector('input').value === '') {
+          document.querySelector('.error-msg').textContent = 'Musisz coś wpisać!'
+          return
+        } else {
+          document.querySelector('.error-msg').textContent = 'Wpisz poprawną nazwę miasta!'
+          console.log(error);
+        };
       });
   };
 
@@ -112,7 +117,7 @@ function App() {
           sectionsToHide.forEach((section) => {
             section.style.opacity = '1';
           })
-        }, 300);
+        }, 150);
       };
     };
 

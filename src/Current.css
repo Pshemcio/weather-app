@@ -1,22 +1,6 @@
-/* 
-current-forecast
-
-city
-current-temp
-    icon
-    info
-current-others
-    sunrise
-    sunset
-    wind
-    pressure
-    rain
-    humidity
-*/
-
 .current-forecast {
     display: flex;
-    flex-flow: row wrap;
+    flex-wrap: wrap;
     justify-content: flex-start;
 }
 
@@ -30,7 +14,7 @@ current-others
 .city {
     flex-basis: 100%;
     display: flex;
-    flex-flow: column nowrap;
+    flex-flow: column;
     align-items: flex-start;
     padding-left: 30px;
 }
@@ -42,6 +26,11 @@ current-others
 .current-temp,
 .current-others {
     flex-basis: 50%;
+}
+
+.current-temp,
+.city {
+    cursor: default;
 }
 
 .current-temp {
@@ -67,16 +56,6 @@ current-others
     transform: translateY(12px);
 }
 
-/* 
-current-others
-    sunrise
-    sunset
-    wind
-    pressure
-    rain
-    humidity
-*/
-
 .current-others {
     display: flex;
     flex-wrap: wrap;
@@ -86,6 +65,12 @@ current-others
 
 .current-others>* {
     flex-basis: calc(100%/3);
+    transition: .4s;
+    cursor: default;
+}
+
+.current-others>*:hover {
+    background-color: rgba(255, 255, 255, 0.2);
 }
 
 .current-others>*>h3 {

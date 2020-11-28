@@ -65,7 +65,7 @@ input::placeholder,
 
 .error-msg {
     position: absolute;
-    left: 50px;
+    right: 50px;
     top: 32px;
     color: rgb(206, 31, 0)
 }
