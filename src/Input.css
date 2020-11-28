@@ -12,7 +12,8 @@
     padding-top: 40px
 }
 
-.input-wrap {
+.input-wrap,
+form {
     position: relative;
 }
 
@@ -60,4 +61,11 @@ input::placeholder,
 
 .input-wrap button:hover path {
     color: #666;
+}
+
+.error-msg {
+    position: absolute;
+    left: 50px;
+    top: 32px;
+    color: rgb(206, 31, 0)
 }
