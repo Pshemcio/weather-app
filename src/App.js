@@ -11,59 +11,34 @@ import Axios from 'axios';
 library.add(faSearch);
 
 function App() {
-
-  // FUNKCJONALNOŚĆ WSĘPNEJ GEOLOKACJI, ZRÓB PO WSZYSTKIM !!!
-
-  // const [entryCoordinates, setEntryCoordinates] = useState();
-
-  // const konik = () => {
-
-  //   if ("geolocation" in navigator) {
-  //     navigator.geolocation.getCurrentPosition(function (position) {
-  //       lat = position.coords.latitude;
-  //       lon = position.coords.longitude;
-  //       console.log(lat)
-  //       console.log(lon)
-  //     });
-  //   };
-  // };
-  // konik();
-
-  // Axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=9be7b6be531d338240881e6f673303aa&units=metric&lang=pl`)
-  //   .then(function (response) {
-  //     // handle success
-  //     // console.log(response);
-  //     setData(response);
-  //   })
-  //   .catch(function (error) {
-  //     // handle error
-  //     console.log(error);
-  //   });
-
   const entryData = {
-    data: {
-      main: {
-        humidity: 0,
-        pressure: 0,
-        temp: 0,
-        feels_like: 0
-      },
-      name: '',
-      dt: 0,
-      sys: {
-        sunrise: 0,
-        sunset: 0
-      },
-      weather: [
-        {
-          description: '',
-          // main: 'Clear',
-          icon: '10n'
-        }
-      ],
-      wind: {
-        speed: 0
+    main: {
+      humidity: 0,
+      pressure: 0,
+      temp: 0,
+      feels_like: 0
+    },
+    name: '',
+    dt: 0,
+    sys: {
+      sunrise: 0,
+      sunset: 0,
+      country: ''
+    },
+    weather: [
+      {
+        description: '',
+        // main: 'Clear',
+        icon: '10n'
       }
+    ],
+    wind: {
+      speed: 0
+    },
+    timezone: 3600,
+    coord: {
+      lon: 69,
+      lat: 0
     }
   };
 
@@ -72,90 +47,66 @@ function App() {
 
   const getCity = e => {
     setCity(e.target.value);
-  }
+  };
 
+  // const getForecastData = () => {
+  //   Axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${data.coord.lat}&lon=${data.coord.lon}&exclude=hourly,current,minutely,alerts&appid=de310e87d3a7bcda1c723953103565a6&units=metric&lang=pl  `)
+  //     .then(function (response) {
+  //       // handle success
+  //       setForecastData(response.data);
+  //     })
+  // };
+
+  const getCurrentData = () => {
+    Axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=de310e87d3a7bcda1c723953103565a6&units=metric&lang=pl`)
+      .then(function (response) {
+        // handle success
+        document.querySelectorAll('.hide').forEach((section) => {
+          section.style.opacity = '0';
+        })
+        setTimeout(() => {
+          setData(response.data);
+        }, 400);
+
+        document.querySelector('.error-msg').textContent = '';
+        document.querySelector('.input-wrap input').value = '';
+        setCity('');
+        console.log(data);
+
+      })
+      .then(() => {
+        console.log(data);
+      })
+      .catch(function (error) {
+        // handle error
+        if (document.querySelector('input').value === '') {
+          document.querySelector('.error-msg').textContent = 'Musisz coś wpisać!'
+          return
+        } else {
+          document.querySelector('.error-msg').textContent = 'Wpisz poprawną nazwę miasta!'
+          console.log(error);
+        };
+      });
+  };
 
   const submitCity = e => {
     e.preventDefault();
-
-    const getCurrentData = () => {
-      Axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=de310e87d3a7bcda1c723953103565a6&units=metric&lang=pl`)
-        .then(function (response) {
-          // handle success
-
-          document.querySelectorAll('.hide').forEach((section) => {
-            section.style.opacity = '0';
-          })
-
-          setTimeout(() => {
-            setData(response);
-          }, 400);
-          document.querySelector('.error-msg').textContent = '';
-          document.querySelector('.input-wrap input').value = '';
-          setCity('');
-
-        })
-        .catch(function (error) {
-          // handle error
-          if (document.querySelector('input').value === '') {
-            document.querySelector('.error-msg').textContent = 'Musisz coś wpisać!'
-            return
-          } else {
-            document.querySelector('.error-msg').textContent = 'Wpisz poprawną nazwę miasta!'
-            console.log(error);
-          };
-        });
-    };
-
-    // const getForecastData = () => {
-    //   Axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=de310e87d3a7bcda1c723953103565a6&units=metric&lang=pl`)
-    //     .then(function (response) {
-    //       // handle success
-
-    //       document.querySelectorAll('.hide').forEach((section) => {
-    //         section.style.opacity = '0';
-    //       })
-
-    //       setTimeout(() => {
-    //         setData(response);
-    //       }, 400);
-    //       document.querySelector('.error-msg').textContent = '';
-    //       document.querySelector('.input-wrap input').value = '';
-    //       setCity('');
-
-    //     })
-    //     .catch(function (error) {
-    //       // handle error
-    //       if (document.querySelector('input').value === '') {
-    //         document.querySelector('.error-msg').textContent = 'Musisz coś wpisać!'
-    //         return
-    //       } else {
-    //         document.querySelector('.error-msg').textContent = 'Wpisz poprawną nazwę miasta!'
-    //         console.log(error);
-    //       };
-    //     });
-    // }
-
     getCurrentData();
   };
 
   useEffect(() => {
-
-    const test = () => {
-
-      if (data.data.name !== '') {
+    const showContent = (delay) => {
+      if (data.name !== '') {
         const sectionsToHide = document.querySelectorAll('.hide');
 
         setTimeout(() => {
           sectionsToHide.forEach((section) => {
             section.style.opacity = '1';
           })
-        }, 150);
+        }, delay);
       };
     };
-
-    test();
-
+    showContent(150);
   }, [data]);
 
   return (

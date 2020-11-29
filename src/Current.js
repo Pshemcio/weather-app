@@ -1,8 +1,9 @@
 import React from 'react';
 import './Current.css'
+import countriesPL from './countriesPL'
 
 function Current(props) {
-    const data = props.currentData.data;
+    const data = props.currentData;
     const description = data.weather[0].description
     const city = data.name;
     const temp = data.main.temp.toFixed();
@@ -14,17 +15,33 @@ function Current(props) {
     const sunset = data.sys.sunset;
     const icon = data.weather[0].icon;
     const iconUrl = 'http://openweathermap.org/img/wn/' + icon + '@2x.png';
+    const country = data.sys.country;
+    console.log(country)
+    let countryName = '';
+
+    const countryFullName = () => {
+        for (const key in countriesPL) {
+            if (countriesPL.hasOwnProperty(key)) {
+                const element = countriesPL[key];
+
+                if (country === key) {
+                    console.log(element)
+                    countryName = element;
+                }
+            };
+        };
+    };
+
+    countryFullName();
 
     function format_time(daytime) {
-        const time = new Date((daytime * 1000) - (new Date().getTimezoneOffset() * 60000)).toISOString().replace(/T/, ' ').replace(/\..+/, '').slice(11, -3);
+        const time = new Date((daytime * 1000) + (data.timezone * 1000)).toISOString().replace(/T/, ' ').replace(/\..+/, '').slice(11, -3);
 
         return time;
     };
 
     const date = () => {
-        const a = new Date((data.dt * 1000) - (new Date().getTimezoneOffset() * 60000));
-
-
+        const a = new Date((data.dt * 1000) + (data.timezone * 1000));
         const days = ['Niedziela', 'Poniedziałek', 'Wtorek', 'Środa', 'Czwartek', 'Piątek', 'Sobota']
 
         const months = ['Stycznia', 'Lutego', 'Marca', 'Kwietnia', 'Maja', 'Czerwca', 'Lipca', 'Sierpnia', 'Września', 'Października', 'Listopada', 'Grudnia'];
@@ -44,7 +61,7 @@ function Current(props) {
     return (
         <section className="current-forecast hide">
             <div className="city">
-                <h2>{city}</h2>
+                <h2>{city}, <span>{countryName}</span></h2>
                 <p>{date()}</p>
             </div>
             <div className="current-temp">

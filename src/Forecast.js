@@ -3,9 +3,7 @@ import './Forecast.css'
 import Day from './Day'
 const Forecast = (props) => {
 
-    const data = props.forecastData.data;
-    console.log(data)
-
+    // const data = props.forecastData.data;
 
     return (
         <section className="forecast hide">
