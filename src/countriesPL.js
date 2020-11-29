@@ -182,7 +182,7 @@ const countriesPL = {
     QA: 'Katar',
     RE: 'Réunion',
     RO: 'Rumunia',
-    RU: 'Federacja Rosyjska',
+    RU: 'Rosja',
     RW: 'Rwanda',
     BL: 'Saint Barthélemy',
     SH: 'Wyspa Świętej Heleny',

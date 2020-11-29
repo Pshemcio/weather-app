@@ -3,6 +3,7 @@ import './Forecast.css'
 
 const Day = (props) => {
 
+    //checks if theres actual data, its not in the beginning 
     if (props.forecastData === undefined) {
         return <></>
     };
@@ -14,8 +15,6 @@ const Day = (props) => {
     const max = Math.round(data.temp.max);
     const icon = data.weather[0].icon;
     const iconUrl = 'http://openweathermap.org/img/wn/' + icon + '@2x.png';
-
-    console.log(data)
 
     const date = (x) => {
         const a = new Date((x * 1000) + (timezone * 1000));

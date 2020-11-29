@@ -3,6 +3,12 @@ import './Current.css'
 import countriesPL from './countriesPL'
 
 function Current(props) {
+
+    //checks if theres actual data, its not in the beginning 
+    if (props.currentData.timezone === undefined) {
+        return <></>
+    };
+
     const data = props.currentData;
     const description = data.weather[0].description
     const city = data.name;
@@ -32,13 +38,13 @@ function Current(props) {
 
     countryFullName();
 
-    function format_time(daytime) {
+    function formatTime(daytime) {
         const time = new Date((daytime * 1000) + (data.timezone * 1000)).toISOString().replace(/T/, ' ').replace(/\..+/, '').slice(11, -3);
 
         return time;
     };
 
-    const date = () => {
+    const currentDate = () => {
         const a = new Date((data.dt * 1000) + (data.timezone * 1000));
         const days = ['Niedziela', 'Poniedziałek', 'Wtorek', 'Środa', 'Czwartek', 'Piątek', 'Sobota']
 
@@ -54,13 +60,11 @@ function Current(props) {
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
 
-    const desc = capitalizeFirstLetter(description);
-
     return (
         <section className="current-forecast hide">
             <div className="city">
                 <h2>{city}, <span>{countryName}</span></h2>
-                <p>{date()}</p>
+                <p>{currentDate()}</p>
             </div>
             <div className="current-temp">
                 <div className="icon">
@@ -68,7 +72,7 @@ function Current(props) {
                 </div>
                 <div className="info">
                     <h2>{temp}°C</h2>
-                    <p>{desc}</p>
+                    <p>{capitalizeFirstLetter(description)}</p>
                 </div>
             </div>
             <div className="current-others">
@@ -81,7 +85,7 @@ function Current(props) {
                     <p>Prędkość wiatru</p>
                 </div>
                 <div className="sunrise">
-                    <h3>{format_time(sunrise)}</h3>
+                    <h3>{formatTime(sunrise)}</h3>
                     <p>Wschód</p>
                 </div>
                 <div className="pressure">
@@ -93,11 +97,12 @@ function Current(props) {
                     <p>Wilgotność</p>
                 </div>
                 <div className="sunset">
-                    <h3>{format_time(sunset)}</h3>
+                    <h3>{formatTime(sunset)}</h3>
                     <p>Zachód</p>
                 </div>
             </div>
         </section>
     );
-}
+};
+
 export default Current;

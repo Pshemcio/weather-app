@@ -12,80 +12,29 @@ library.add(faSearch);
 
 function App() {
   const entryData = {
-    main: {
-      humidity: 0,
-      pressure: 0,
-      temp: 0,
-      feels_like: 0
-    },
-    name: '',
-    dt: 0,
-    sys: {
-      sunrise: 0,
-      sunset: 0,
-      country: ''
-    },
-    weather: [
-      {
-        description: '',
-        // main: 'Clear',
-        icon: '10n'
-      }
-    ],
-    wind: {
-      speed: 0
-    },
-    timezone: 3600,
     coord: {
       lon: 69,
       lat: 0
     }
   };
 
-  const entryForecast = {
-    daily:
-      [{
-        dt: 1606892400,
-        feels_like: {
-          day: 68
-        },
-        temp: {
-          day: 69
-        },
-        weather: [{
-          icon: '04d'
-        }]
-      }]
-    ,
-    timezone_offset: 0
-  };
-
   const [city, setCity] = useState();
   const [data, setData] = useState(entryData);
-  const [forecast, setForecast] = useState(entryForecast);
+  const [forecast, setForecast] = useState();
 
   const getCity = e => {
     setCity(e.target.value);
   };
 
+  const getForecastData = (lat, lon) => {
+    Axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=hourly,current,minutely,alerts&appid=de310e87d3a7bcda1c723953103565a6&units=metric&lang=pl  `)
+      .then(function (resp) {
+        // handle success
+        setForecast(resp.data);
+      })
+  };
 
-  /////////////////////////////////////////////////
-  // function testBtn() {
-  //   console.log('konik')
-  //   console.log(forecast);
-  // };
-  ////////////////////////////////////////////////////
-
-
-  // const getForecastData = () => {
-  //   Axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${data.coord.lat}&lon=${data.coord.lon}&exclude=hourly,current,minutely,alerts&appid=de310e87d3a7bcda1c723953103565a6&units=metric&lang=pl  `)
-  //     .then(function (resp) {
-  //       // handle success
-  //       setForecast(resp.data);
-  //     })
-  // };
-
-  const getCurrentData = () => {
+  const getCurrentData = (city) => {
     Axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=de310e87d3a7bcda1c723953103565a6&units=metric&lang=pl`)
       .then(function (response) {
         // handle success
@@ -115,7 +64,7 @@ function App() {
 
   const submitCity = e => {
     e.preventDefault();
-    getCurrentData();
+    getCurrentData(city);
   };
 
   useEffect(() => {
@@ -134,11 +83,7 @@ function App() {
   }, [data]);
 
   useEffect(() => {
-    Axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${data.coord.lat}&lon=${data.coord.lon}&exclude=hourly,current,minutely,alerts&appid=de310e87d3a7bcda1c723953103565a6&units=metric&lang=pl  `)
-      .then(function (resp) {
-        // handle success
-        setForecast(resp.data);
-      })
+    getForecastData(data.coord.lat, data.coord.lon);
 
   }, [data.coord.lat, data.coord.lon])
 

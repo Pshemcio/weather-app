@@ -3,28 +3,13 @@ import './Forecast.css'
 import Day from './Day'
 const Forecast = (props) => {
 
+    if (props.forecastData === undefined) {
+        return <></>
+    };
+
     const data = props.forecastData;
     const timezone = data.timezone_offset;
     const days = data.daily;
-    // console.log(days)
-    // console.log(days[1])
-
-
-
-    // const test = e => {
-    //     console.log('NUMER !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
-    //     console.log(e)
-
-    //     for (const key in days[e]) {
-    //         if (days[e].hasOwnProperty(key)) {
-    //             const element = days[e][key];
-    //             console.log(element)
-    //         }
-    //     }
-    // }
-
-    // test(1);
-    // test(2);
 
     return (
         <section className="forecast hide">
@@ -38,20 +23,5 @@ const Forecast = (props) => {
         </section>
     );
 };
-// const sciaga = {
-//     data:
-//         [{
-//             dt: 1606892400,
-//             feels_like: {
-//                 day: 68
-//             },
-//             temp: {
-//                 day: 69
-//             },
-//             weather: [{
-//                 icon: '04d'
-//             }]
-//         }],
-//     timezone_offset: 0
-// };
+
 export default Forecast;
