@@ -16,7 +16,6 @@ function Current(props) {
     const icon = data.weather[0].icon;
     const iconUrl = 'http://openweathermap.org/img/wn/' + icon + '@2x.png';
     const country = data.sys.country;
-    console.log(country)
     let countryName = '';
 
     const countryFullName = () => {
@@ -25,7 +24,6 @@ function Current(props) {
                 const element = countriesPL[key];
 
                 if (country === key) {
-                    console.log(element)
                     countryName = element;
                 }
             };

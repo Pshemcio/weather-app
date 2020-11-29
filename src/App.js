@@ -42,18 +42,46 @@ function App() {
     }
   };
 
+  const entryForecast = {
+    daily:
+      [{
+        dt: 1606892400,
+        feels_like: {
+          day: 68
+        },
+        temp: {
+          day: 69
+        },
+        weather: [{
+          icon: '04d'
+        }]
+      }]
+    ,
+    timezone_offset: 0
+  };
+
   const [city, setCity] = useState();
   const [data, setData] = useState(entryData);
+  const [forecast, setForecast] = useState(entryForecast);
 
   const getCity = e => {
     setCity(e.target.value);
   };
 
+
+  /////////////////////////////////////////////////
+  // function testBtn() {
+  //   console.log('konik')
+  //   console.log(forecast);
+  // };
+  ////////////////////////////////////////////////////
+
+
   // const getForecastData = () => {
   //   Axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${data.coord.lat}&lon=${data.coord.lon}&exclude=hourly,current,minutely,alerts&appid=de310e87d3a7bcda1c723953103565a6&units=metric&lang=pl  `)
-  //     .then(function (response) {
+  //     .then(function (resp) {
   //       // handle success
-  //       setForecastData(response.data);
+  //       setForecast(resp.data);
   //     })
   // };
 
@@ -64,6 +92,7 @@ function App() {
         document.querySelectorAll('.hide').forEach((section) => {
           section.style.opacity = '0';
         })
+
         setTimeout(() => {
           setData(response.data);
         }, 400);
@@ -71,11 +100,6 @@ function App() {
         document.querySelector('.error-msg').textContent = '';
         document.querySelector('.input-wrap input').value = '';
         setCity('');
-        console.log(data);
-
-      })
-      .then(() => {
-        console.log(data);
       })
       .catch(function (error) {
         // handle error
@@ -109,15 +133,25 @@ function App() {
     showContent(150);
   }, [data]);
 
+  useEffect(() => {
+    Axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${data.coord.lat}&lon=${data.coord.lon}&exclude=hourly,current,minutely,alerts&appid=de310e87d3a7bcda1c723953103565a6&units=metric&lang=pl  `)
+      .then(function (resp) {
+        // handle success
+        setForecast(resp.data);
+      })
+
+  }, [data.coord.lat, data.coord.lon])
+
   return (
     <div className="App">
       <header className="App-header">
         <h1>Weather app in</h1>
         <img src={logo} className="App-logo" alt="logo" />
       </header>
+      {/* <button className="testowy" onClick={testBtn}>Testowy</button> */}
       <Input cityName={getCity} checkForm={submitCity} />
       <Current currentData={data} />
-      <Forecast forecastData={data} />
+      <Forecast forecastData={forecast} />
     </div>
   );
 }

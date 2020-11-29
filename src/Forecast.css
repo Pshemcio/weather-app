@@ -19,6 +19,15 @@
 
 .day h4 {
     text-transform: capitalize;
+    margin-bottom: 0;
+}
+
+.day p:first-of-type {
+    margin-top: 0;
+}
+
+.day span {
+    margin: 0 10px;
 }
 
 .day:hover {

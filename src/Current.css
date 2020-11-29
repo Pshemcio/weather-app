@@ -87,7 +87,7 @@
     font-weight: 300;
 }
 
-section img {
+.current-temp img {
     transform: translateY(-10px);
     width: 130px;
     height: 130px;
