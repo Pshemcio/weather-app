@@ -1,6 +1,7 @@
 import React from 'react';
 import './Current.css'
 import countriesPL from './countriesPL'
+import Icons from './Icons'
 
 function Current(props) {
 
@@ -20,7 +21,7 @@ function Current(props) {
     const sunrise = data.sys.sunrise;
     const sunset = data.sys.sunset;
     const icon = data.weather[0].icon;
-    const iconUrl = 'http://openweathermap.org/img/wn/' + icon + '@2x.png';
+    // const iconUrl = 'http://openweathermap.org/img/wn/' + icon + '@2x.png';
     const country = data.sys.country;
     let countryName = '';
 
@@ -67,9 +68,7 @@ function Current(props) {
                 <p>{currentDate()}</p>
             </div>
             <div className="current-temp">
-                <div className="icon">
-                    <img src={iconUrl} alt="lorem"></img>
-                </div>
+                <Icons iconInfo={icon} />
                 <div className="info">
                     <h2>{temp}°C</h2>
                     <p>{capitalizeFirstLetter(description)}</p>

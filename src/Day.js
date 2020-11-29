@@ -1,5 +1,7 @@
 import React from 'react'
 import './Forecast.css'
+import Icons from './Icons'
+import './weather-icons.min.css'
 
 const Day = (props) => {
 
@@ -14,7 +16,6 @@ const Day = (props) => {
     const min = Math.round(data.temp.min);
     const max = Math.round(data.temp.max);
     const icon = data.weather[0].icon;
-    const iconUrl = 'http://openweathermap.org/img/wn/' + icon + '@2x.png';
 
     const date = (x) => {
         const a = new Date((x * 1000) + (timezone * 1000));
@@ -30,7 +31,8 @@ const Day = (props) => {
             <h4>
                 {date(day)}
             </h4>
-            <img src={iconUrl} alt="logo" />
+            <Icons iconInfo={icon} />
+            {/* <img src={iconUrl} alt="logo" /> */}
             <p><span>{max}°C</span> <span>{min}°C</span></p>
         </div>
     );

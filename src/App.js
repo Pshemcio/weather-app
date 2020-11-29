@@ -93,7 +93,6 @@ function App() {
         <h1>Weather app in</h1>
         <img src={logo} className="App-logo" alt="logo" />
       </header>
-      {/* <button className="testowy" onClick={testBtn}>Testowy</button> */}
       <Input cityName={getCity} checkForm={submitCity} />
       <Current currentData={data} />
       <Forecast forecastData={forecast} />

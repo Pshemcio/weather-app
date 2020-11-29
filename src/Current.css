@@ -40,6 +40,7 @@
 }
 
 .current-temp {
+    position: relative;
     justify-content: center;
     align-items: center;
 }
@@ -50,15 +51,11 @@
 }
 
 .current-temp p {
+    position: absolute;
     font-weight: 300;
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     text-align: left;
     margin: 0;
-}
-
-.icon {
-    margin-right: 20px;
-    transform: translateY(12px);
 }
 
 .current-others {
@@ -85,10 +82,4 @@
 .current-others>*>* {
     margin: 10px;
     font-weight: 300;
-}
-
-.current-temp img {
-    transform: translateY(-10px);
-    width: 130px;
-    height: 130px;
 }

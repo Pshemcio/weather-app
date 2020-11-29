@@ -3,6 +3,7 @@
 }
 
 .city-input {
+    position: relative;
     display: flex;
     justify-content: center;
     padding-top: 40px
@@ -14,23 +15,29 @@ form {
 }
 
 input,
-button {
+button,
+.city-input>button:before {
     outline: none;
     background-color: rgba(255, 255, 255, 0.7);
+}
+
+input,
+.city-input>button {
+    font-size: calc(var(--input-size)/2.5);
+    line-height: var(--input-size);
+    border: 1px solid white;
+    border-radius: var(--input-size);
 }
 
 input {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     color: #666;
-    font-size: calc(var(--input-size)/2.5);
-    line-height: var(--input-size);
     padding: 0 20px;
-    border: 1px solid white;
-    border-radius: var(--input-size);
     min-width: 500px;
 }
 
-.input-wrap button {
+.input-wrap button,
+.city-input>button:before {
     cursor: pointer;
     position: absolute;
     right: 0;
@@ -40,24 +47,29 @@ input {
     width: var(--input-size);
     border: none;
     border-radius: 50%;
-    transition: background .3s;
+    color: rgba(0, 0, 0, 0.2);
+    font-size: 25px;
 }
 
-.input-wrap path {
-    transition: color .3s;
-}
-
-input::placeholder,
-.input-wrap path {
+input::placeholder {
     color: #bbc;
 }
 
-.input-wrap button:hover {
-    background: rgba(255, 208, 208, 0.6);
+.input-wrap button,
+.city-input>button,
+.city-input>button:before {
+    transition: background .3s, color .3s, right .3s;
 }
 
-.input-wrap button:hover path {
-    color: #666;
+.input-wrap button:hover,
+.city-input>button:hover,
+.city-input>button:hover::before {
+    color: white;
+    background: rgba(255, 208, 208);
+}
+
+.city-input>button:hover::before {
+    right: -5px;
 }
 
 .error-msg {
@@ -65,4 +77,16 @@ input::placeholder,
     right: 50px;
     top: 32px;
     color: rgb(206, 31, 0)
+}
+
+.city-input>button {
+    position: absolute;
+    top: -5px;
+    right: 30%;
+    border-radius: var(--input-size);
+    padding: 0 54px;
+    color: rgba(224, 138, 138, 0.932);
+    border: none;
+    font-family: 'weathericons', 'Montserrat', sans-serif;
+    cursor: pointer;
 }
