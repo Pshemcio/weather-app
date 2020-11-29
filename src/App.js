@@ -1,14 +1,10 @@
 import logo from './logo.svg';
 import './App.css';
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import Input from './Input'
 import Current from './Current.js'
 import Forecast from './Forecast';
 import { useEffect, useState } from 'react';
 import Axios from 'axios';
-
-library.add(faSearch);
 
 function App() {
   const entryData = {
