@@ -5,12 +5,13 @@
 1200px for large devices. 
 */
 
-@media(max-width:768px) and (orientation:portrait) {
-    body {
-        background-size: 400%;
-        background-position: center;
+/* @media(max-width:768px) and (orientation:portrait) {
+    .parallax-bg div {
+        background: linear-gradient(rgba(0, 0, 0, 0.15) 40%, rgba(0, 0, 0, 1)), url(../img/mobile-bg.jpg);
+        background-size: 120%;
+        background-position: 0 100%;
     }
-}
+} */
 
 
 @media(max-width:1200px) {
@@ -34,6 +35,12 @@
         font-size: 13px;
     }
 
+    .parallax-bg div {
+        background: linear-gradient(rgba(0, 0, 0, 0.15) 40%, rgba(0, 0, 0, 1)), url(../img/mobile-bg.jpg);
+        background-size: 120%;
+        background-position: 0 60%;
+    }
+
     .current-others>* {
         flex-basis: calc(100%/2);
     }
@@ -54,6 +61,10 @@
 }
 
 @media(max-width:576px) {
+
+    :root {
+        font-size: 12px;
+    }
 
     .current-temp {
         margin-bottom: 30px;

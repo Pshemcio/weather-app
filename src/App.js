@@ -5,13 +5,13 @@ import Input from './Input'
 import Current from './Current.js'
 import Forecast from './Forecast';
 
-import './weather-icons.min.css'
-import './App.css';
-import './Icons.css';
-import './Input.css';
-import './Current.css'
-import './Forecast.css';
-import './Rwd.css'
+import './css/weather-icons.min.css'
+import './css/App.css';
+import './css/Icons.css';
+import './css/Input.css';
+import './css/Current.css'
+import './css/Forecast.css';
+import './css/Rwd.css'
 
 const App = () => {
   const entryData = {
@@ -24,6 +24,20 @@ const App = () => {
   const [city, setCity] = useState();
   const [data, setData] = useState(entryData);
   const [forecast, setForecast] = useState();
+
+  const parallax = () => {
+    const parallaxBg = document.querySelector('.parallax-bg');
+    const parallaxDiv = document.querySelector('.parallax-bg div');
+    const parValue = (window.scrollY).toFixed(0);
+
+    if (parallaxBg === null) return;
+
+    parallaxBg.style.top = parValue + 'px';
+    parallaxDiv.style.backgroundPosition = (`0 ${60 - parValue * 0.006}%`);
+
+  };
+
+  window.addEventListener('scroll', parallax);
 
   const getCity = e => {
     setCity(e.target.value);
@@ -112,6 +126,7 @@ const App = () => {
 
   return (
     <div className="App">
+      <div className="parallax-bg"><div></div></div>
       <header className="App-header">
         <h1>Weather app in</h1>
         <img src={logo} className="App-logo" alt="logo" />
