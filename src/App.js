@@ -25,6 +25,8 @@ const App = () => {
   const [data, setData] = useState(entryData);
   const [forecast, setForecast] = useState();
 
+
+
   const parallax = () => {
     const parallaxBg = document.querySelector('.parallax-bg');
     const parallaxDiv = document.querySelector('.parallax-bg div');

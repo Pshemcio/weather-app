@@ -53,6 +53,10 @@
         flex-basis: 100%;
     }
 
+    .day:last-of-type {
+        margin-bottom: 150px;
+    }
+
     .current-temp,
     .current-others {
         flex-basis: 100%;
