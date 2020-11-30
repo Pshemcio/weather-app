@@ -49,10 +49,6 @@
         min-width: 50vw;
     }
 
-    .day {
-        flex-basis: 100%;
-    }
-
     .day:last-of-type {
         margin-bottom: 150px;
     }

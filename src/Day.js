@@ -24,7 +24,7 @@ const Day = props => {
     };
 
     return (
-        <div className='day'>
+        <div className='day hide display'>
             <h4>
                 {date(day)}
             </h4>

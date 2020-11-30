@@ -26,20 +26,18 @@ const App = () => {
   const [forecast, setForecast] = useState();
 
 
-
-  const parallax = () => {
+  // because bga-fixed doesnt work properly on ios :)
+  const bgAttachment = () => {
     const parallaxBg = document.querySelector('.parallax-bg');
-    const parallaxDiv = document.querySelector('.parallax-bg div');
     const parValue = (window.scrollY).toFixed(0);
 
     if (parallaxBg === null) return;
 
     parallaxBg.style.top = parValue + 'px';
-    parallaxDiv.style.backgroundPosition = (`0 ${60 - parValue * 0.006}%`);
 
   };
 
-  window.addEventListener('scroll', parallax);
+  window.addEventListener('scroll', bgAttachment);
 
   const getCity = e => {
     setCity(e.target.value);
@@ -109,12 +107,18 @@ const App = () => {
   useEffect(() => {
     const showContent = (delay) => {
       if (data.name !== '') {
-        const sectionsToHide = document.querySelectorAll('.hide');
+        const componentsToShow = document.querySelectorAll('.hide');
+        const componentsToDisplay = document.querySelectorAll('.display');
+
+        componentsToDisplay.forEach((component) => {
+          component.style.display = 'block';
+        });
 
         setTimeout(() => {
-          sectionsToHide.forEach((section) => {
-            section.style.opacity = '1';
-          })
+          componentsToShow.forEach((component) => {
+            component.style.opacity = '1';
+          });
+
         }, delay);
       };
     };

@@ -10,7 +10,7 @@ const Forecast = props => {
     const days = data.daily;
 
     return (
-        <section className="forecast hide">
+        <section className="forecast">
             <Day forecastData={days[1]} modTimezone={timezone} />
             <Day forecastData={days[2]} modTimezone={timezone} />
             <Day forecastData={days[3]} modTimezone={timezone} />
