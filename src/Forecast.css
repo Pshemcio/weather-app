@@ -1,16 +1,14 @@
 .forecast {
-    position: absolute;
-    left: 0;
-    bottom: 30px;
     width: 100%;
     display: flex;
-    padding: 0 20px;
+    flex-wrap: wrap;
+    padding: 0 30px;
     justify-content: space-between;
+    margin-top: 50px;
 }
 
 .day {
-    flex-basis: calc(100%/7);
-    margin: 0 10px;
+    flex-basis: calc(90%/7);
     border-radius: 10px;
     background-color: rgba(200, 200, 200, 0.1);
     transition: background-color .4s;

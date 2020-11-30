@@ -1,7 +1,5 @@
-import React from 'react'
-import './Forecast.css'
 import Day from './Day'
-const Forecast = (props) => {
+const Forecast = props => {
 
     if (props.forecastData === undefined) {
         return <></>

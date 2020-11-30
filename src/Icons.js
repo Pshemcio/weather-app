@@ -1,10 +1,5 @@
-import React from 'react'
-import './Icons.css';
-
-const Icons = (props) => {
-
-    const icon = props.iconInfo
-    console.log(icon);
+const Icons = props => {
+    const icon = props.iconInfo;
 
     const iconsList = {
         '01d': 'wi-day-sunny',
@@ -30,11 +25,8 @@ const Icons = (props) => {
     const customIcon = () => {
         for (const key in iconsList) {
             if (iconsList.hasOwnProperty(key)) {
-                const element = iconsList[key];
-
                 if (icon === key) {
-                    console.log(key)
-                    return 'wi ' + element;
+                    return 'wi ' + iconsList[key];
                 }
             };
         };

@@ -1,10 +1,7 @@
-import React from 'react';
-import './Input.css';
-
 const Input = props => {
     return (
         <section className="city-input">
-            <button className="wi wi-tornado">Wylosuj!</button>
+            {/* <button className="wi wi-tornado" onClick={props.checkForm}>Wylosuj!</button> */}
             <form onSubmit={props.checkForm}>
                 <div className='input-wrap'>
                     <input type="text" name="name" placeholder='Wpisz nazwę miasta!' onChange={props.cityName} />

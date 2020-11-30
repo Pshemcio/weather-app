@@ -1,9 +1,6 @@
-import React from 'react'
-import './Forecast.css'
 import Icons from './Icons'
-import './weather-icons.min.css'
 
-const Day = (props) => {
+const Day = props => {
 
     //checks if theres actual data, its not in the beginning 
     if (props.forecastData === undefined) {
@@ -17,7 +14,7 @@ const Day = (props) => {
     const max = Math.round(data.temp.max);
     const icon = data.weather[0].icon;
 
-    const date = (x) => {
+    const date = x => {
         const a = new Date((x * 1000) + (timezone * 1000));
         const days = ['Niedziela', 'Poniedziałek', 'Wtorek', 'Środa', 'Czwartek', 'Piątek', 'Sobota']
 
@@ -32,7 +29,6 @@ const Day = (props) => {
                 {date(day)}
             </h4>
             <Icons iconInfo={icon} />
-            {/* <img src={iconUrl} alt="logo" /> */}
             <p><span>{max}°C</span> <span>{min}°C</span></p>
         </div>
     );

@@ -1,9 +1,7 @@
-import React from 'react';
-import './Current.css'
 import countriesPL from './countriesPL'
 import Icons from './Icons'
 
-function Current(props) {
+const Current = props => {
 
     //checks if theres actual data, its not in the beginning 
     if (props.currentData.timezone === undefined) {
@@ -21,25 +19,19 @@ function Current(props) {
     const sunrise = data.sys.sunrise;
     const sunset = data.sys.sunset;
     const icon = data.weather[0].icon;
-    // const iconUrl = 'http://openweathermap.org/img/wn/' + icon + '@2x.png';
     const country = data.sys.country;
-    let countryName = '';
 
     const countryFullName = () => {
         for (const key in countriesPL) {
             if (countriesPL.hasOwnProperty(key)) {
-                const element = countriesPL[key];
-
                 if (country === key) {
-                    countryName = element;
+                    return countriesPL[key];
                 }
             };
         };
     };
 
-    countryFullName();
-
-    function formatTime(daytime) {
+    const formatTime = daytime => {
         const time = new Date((daytime * 1000) + (data.timezone * 1000)).toISOString().replace(/T/, ' ').replace(/\..+/, '').slice(11, -3);
 
         return time;
@@ -64,7 +56,7 @@ function Current(props) {
     return (
         <section className="current-forecast hide">
             <div className="city">
-                <h2>{city}, <span>{countryName}</span></h2>
+                <h2>{city}, <span>{countryFullName()}</span></h2>
                 <p>{currentDate()}</p>
             </div>
             <div className="current-temp">

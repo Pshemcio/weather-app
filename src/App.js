@@ -1,12 +1,19 @@
 import logo from './logo.svg';
-import './App.css';
+import { React, useEffect, useState } from 'react';
+import Axios from 'axios';
 import Input from './Input'
 import Current from './Current.js'
 import Forecast from './Forecast';
-import { useEffect, useState } from 'react';
-import Axios from 'axios';
 
-function App() {
+import './weather-icons.min.css'
+import './App.css';
+import './Icons.css';
+import './Input.css';
+import './Current.css'
+import './Forecast.css';
+import './Rwd.css'
+
+const App = () => {
   const entryData = {
     coord: {
       lon: 69,
@@ -60,7 +67,27 @@ function App() {
 
   const submitCity = e => {
     e.preventDefault();
-    getCurrentData(city);
+
+    if (e.target.tagName === 'FORM') {
+      getCurrentData(city);
+    }
+
+    // ogarnąć cityId z OWM, potem generować je losowo
+    // else {
+    //   const randomCityGenerator = () => {
+
+    //     const country = 'pl';
+    //     if (country !== undefined) {
+    //       console.log(country.toUpperCase())
+    //     } else {
+    //       console.log('Spróbuj jeszcze raz :(')
+
+    //     }
+    //   }
+
+    //   randomCityGenerator();
+    //   getCurrentData('krakow');
+    // }
   };
 
   useEffect(() => {
