@@ -11,7 +11,7 @@ https://pshemcio.github.io/weather-app/
 * [Javascript](https://developer.mozilla.org/pl/docs/Web/JavaScript)
 * [CSS3](https://developer.mozilla.org/pl/docs/Web/CSS)
 
-## Authors
+## Author
 
 * **Przemysław Majka** - *Initial work* - [Pshemcio](https://github.com/Pshemcio)
 
